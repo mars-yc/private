@@ -14,6 +14,30 @@
       <property name="username" column="username" type="string"/>
       <property name="registerTime" column="register_time" type="date"/>
       <property name="lastLoginTime" column="last_login_time" type="date"/>
-      <many-to-one name="student" column="student_id" unique="true" class="com.perfume.tech.hibernate.pojo.Student" not-null="true"/>
+      <!-- <many-to-one name="student" column="student_id" unique="true" class="com.perfume.tech.hibernate.pojo.Student" not-null="true"/> -->
+      <many-to-one name="student" column="student_id" cascade="remove" unique="true" class="com.perfume.tech.hibernate.pojo.Student" not-null="true"/>
+      <!-- <many-to-one name="student" column="student_id" cascade="delete" unique="true" class="com.perfume.tech.hibernate.pojo.Student" not-null="true"/> -->
+      <!-- <many-to-one name="student" column="student_id" cascade="save-update" unique="true" class="com.perfume.tech.hibernate.pojo.Student" not-null="true"/> -->
+      
+      <!-- 
+      
+based on CascadeStyle.java the cascade style has below scope
+		STYLES.put( "all", ALL );
+		STYLES.put( "all-delete-orphan", ALL_DELETE_ORPHAN );
+		STYLES.put( "save-update", UPDATE );
+		STYLES.put( "persist", PERSIST );
+		STYLES.put( "merge", MERGE );
+		STYLES.put( "lock", LOCK );
+		STYLES.put( "refresh", REFRESH );
+		STYLES.put( "replicate", REPLICATE );
+		STYLES.put( "evict", EVICT );
+		STYLES.put( "delete", DELETE );
+		STYLES.put( "remove", DELETE ); // adds remove as a sort-of alias for delete...
+		STYLES.put( "delete-orphan", DELETE_ORPHAN );
+		STYLES.put( "none", NONE );
+		      
+      cascade:
+      	save-update - No need to save the referenced Object before the saving operation since it will be saved by cascade
+       -->
    </class>
 </hibernate-mapping>
