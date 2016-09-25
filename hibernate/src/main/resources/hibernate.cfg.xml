@@ -18,8 +18,8 @@
 		<property name="show_sql">true</property>
 		<property name="format_sql">false</property>
 
-		<mapping resource="com/perfume/tech/hibernate/pojo/Confidential.hbm.xml" />
-		<mapping resource="com/perfume/tech/hibernate/pojo/Student.hbm.xml" />
+		<mapping resource="hbm/Confidential.hbm.xml" />
+		<mapping resource="hbm/Student.hbm.xml" />
 
 	</session-factory>
 </hibernate-configuration>
