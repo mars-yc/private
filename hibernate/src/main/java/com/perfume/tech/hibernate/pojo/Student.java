@@ -21,6 +21,8 @@ public class Student {
 	private Confidential confidential;
 	private Clazz clazz;
 	private Set<Teacher> teachers;
+	
+	private Card card;
 
 	public Student() {
 		super();
@@ -89,10 +91,18 @@ public class Student {
 		this.teachers = teachers;
 	}
 
+	public Card getCard() {
+		return card;
+	}
+
+	public void setCard(Card card) {
+		this.card = card;
+	}
+
 	@Override
 	public String toString() {
 		return "Student [id=" + id + ", name=" + name + ", gender=" + gender + ", birthday=" + birthday + ", clazz="
-				+ clazz + ", teachers=" + teachers + "]";
+				+ clazz + ", teachers=" + teachers + ", card=" + card + "]";
 	}
 
 }

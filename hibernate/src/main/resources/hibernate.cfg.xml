@@ -13,13 +13,14 @@
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
 		<!-- 数据库方言 -->
 		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
-		<property name="hbm2ddl.auto">update</property>
-		<!-- <property name="hbm2ddl.auto">create-drop</property> -->
+		<!-- <property name="hbm2ddl.auto">update</property> -->
+		<property name="hbm2ddl.auto">create-drop</property>
 		<property name="show_sql">true</property>
 		<property name="format_sql">false</property>
 
 		<mapping resource="hbm/Confidential.hbm.xml" />
 		<mapping resource="hbm/Student.hbm.xml" />
+		<mapping resource="hbm/Card.hbm.xml" />
 
 	</session-factory>
 </hibernate-configuration>

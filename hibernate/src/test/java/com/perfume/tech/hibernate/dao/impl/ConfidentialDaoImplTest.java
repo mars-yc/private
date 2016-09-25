@@ -1,10 +1,12 @@
 package com.perfume.tech.hibernate.dao.impl;
 
 import java.util.Date;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -61,14 +63,16 @@ public class ConfidentialDaoImplTest {
 	@Ignore
 	@Test
 	public void testLoadAll() {
-		logger.debug(confidentialDao.loadAll());
+		Set<Confidential> set = confidentialDao.loadAll();
+		logger.debug(set);
+		Assert.assertTrue(set.size() == 1);
 	}
 	
 	@Test
 	public void test03CascadeDelete() {
 		Confidential cfd = confidentialDao.getConfidentialByUserName(confidential.getUsername());
 		confidentialDao.delete(cfd);
-		logger.debug(confidentialDao.loadAll());
+		Assert.assertTrue(confidentialDao.loadAll().size() == 0);
 	}
 	
 	@Test

@@ -4,17 +4,16 @@
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping>
-   <class name="com.perfume.tech.hibernate.pojo.Student" table="hib_student_tbl">
+   <class name="com.perfume.tech.hibernate.pojo.Card" table="hib_card_tbl">
       <meta attribute="class-description">
-         Confidential class mapping file.
+         Card mapping file.
       </meta>
       <id name="id" type="int" column="id">
          <generator class="native"/>
       </id>
-      <property name="name" column="username" type="string"/>
-      <property name="gender" column="gender" type="string"/>
-      <property name="birthday" column="birthday" type="date"/>
+      <property name="number" column="number" type="string"/>
+      <property name="balance" column="balance" type="double"/>
       
-      <one-to-one name="card" cascade="delete,save-update"></one-to-one>
+	  <one-to-one name="student" cascade="delete,save-update"></one-to-one>
    </class>
 </hibernate-mapping>
