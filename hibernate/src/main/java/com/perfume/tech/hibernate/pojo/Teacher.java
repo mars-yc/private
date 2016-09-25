@@ -15,7 +15,18 @@ public class Teacher {
 	private String gender;
 	private String title;
 
-	private Set<Student> student;
+	private Set<Student> students;
+
+	public Teacher() {
+		super();
+	}
+
+	public Teacher(String name, String gender, String title) {
+		super();
+		this.name = name;
+		this.gender = gender;
+		this.title = title;
+	}
 
 	public Integer getId() {
 		return id;
@@ -49,12 +60,17 @@ public class Teacher {
 		this.title = title;
 	}
 
-	public Set<Student> getStudent() {
-		return student;
+	public Set<Student> getStudents() {
+		return students;
 	}
 
-	public void setStudent(Set<Student> student) {
-		this.student = student;
+	public void setStudents(Set<Student> students) {
+		this.students = students;
+	}
+
+	@Override
+	public String toString() {
+		return "Teacher [id=" + id + ", name=" + name + ", gender=" + gender + ", title=" + title + "]";
 	}
 
 }

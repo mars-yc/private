@@ -21,6 +21,7 @@
 		<mapping resource="hbm/Confidential.hbm.xml" />
 		<mapping resource="hbm/Student.hbm.xml" />
 		<mapping resource="hbm/Card.hbm.xml" />
+		<mapping resource="hbm/Teacher.hbm.xml" />
 
 	</session-factory>
 </hibernate-configuration>

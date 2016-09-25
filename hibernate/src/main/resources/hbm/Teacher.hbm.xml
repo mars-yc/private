@@ -4,7 +4,7 @@
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping>
-   <class name="com.perfume.tech.hibernate.pojo.Student" table="hib_student_tbl">
+   <class name="com.perfume.tech.hibernate.pojo.Teacher" table="hib_teacher_tbl">
       <meta attribute="class-description">
          Confidential class mapping file.
       </meta>
@@ -13,14 +13,13 @@
       </id>
       <property name="name" column="name" type="string"/>
       <property name="gender" column="gender" type="string"/>
-      <property name="birthday" column="birthday" type="date"/>
+      <property name="title" column="title" type="string"/>
       
-      <one-to-one name="card" cascade="delete,save-update"></one-to-one>
+      <set name="students" table="hib_student_teacher_mapping_tbl" inverse="true">
+	  	<key column="teacher_id"></key>
+	      <many-to-many class="com.perfume.tech.hibernate.pojo.Student" column="student_id"></many-to-many>
+      </set>
       
-      <set name="teachers" table="hib_student_teacher_mapping_tbl" cascade="none">
-	  	<key column="student_id"></key>
-	      <many-to-many class="com.perfume.tech.hibernate.pojo.Teacher" column="teacher_id"></many-to-many>
-      </set>      
       
    </class>
 </hibernate-mapping>
