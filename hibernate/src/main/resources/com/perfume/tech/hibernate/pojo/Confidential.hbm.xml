@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="com.perfume.tech.hibernate.pojo.Confidential" table="hib_confidential_tbl">
+      <meta attribute="class-description">
+         Confidential class mapping file.
+      </meta>
+      <id name="id" type="int" column="id">
+         <generator class="native"/>
+      </id>
+      <property name="username" column="username" type="string"/>
+      <property name="registerTime" column="register_time" type="date"/>
+      <property name="lastLoginTime" column="last_login_time" type="date"/>
+      <many-to-one name="student" column="student_id" unique="true" class="com.perfume.tech.hibernate.pojo.Student" not-null="true"/>
+   </class>
+</hibernate-mapping>
