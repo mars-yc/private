@@ -1,10 +1,13 @@
 package com.perfume.tech.hibernate.utils;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtils {
+	
+	private static final Logger logger = Logger.getLogger(HibernateUtils.class);
 	
 	private static final SessionFactory sessionFactory;
 	private static HibernateUtils hibernateUtils;
@@ -33,12 +36,36 @@ public class HibernateUtils {
 	}
 	
 	public Session getSession() {
-		return sessionFactory.openSession();
+		Session session = sessions.get();
+		if(session == null) {
+			synchronized(sessions) {
+				if(session == null) {
+					session = sessionFactory.openSession();
+					sessions.set(session);
+					if(logger.isDebugEnabled()) {
+						logger.debug("open session - " + session.hashCode());
+					}
+				}
+			}
+		}
+		return session;
 	}
 	
+	/**
+	 * Will not actually close the session
+	 */
 	public void closeSession() {
+		if(logger.isDebugEnabled()) {
+			logger.debug("free session - " + sessions.get().hashCode());
+		}
+	}
+	
+	public final void close() {
 		Session session = sessions.get();
 		if(session != null) {
+			if(logger.isDebugEnabled()) {
+				logger.debug("-----------------close session - " + sessions.get().hashCode());
+			}
 			session.close();
 		}
 	}

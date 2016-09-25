@@ -1,7 +1,5 @@
 package com.perfume.tech.hibernate.dao.impl;
 
-import static org.junit.Assert.*;
-
 import java.util.Date;
 
 import org.apache.log4j.Logger;
@@ -9,34 +7,43 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import com.perfume.tech.hibernate.dao.ConfidentialDao;
 import com.perfume.tech.hibernate.dao.StudentDao;
 import com.perfume.tech.hibernate.pojo.Confidential;
 import com.perfume.tech.hibernate.pojo.Student;
+import com.perfume.tech.hibernate.utils.HibernateUtils;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ConfidentialDaoImplTest {
 	
 	private static final Logger logger = Logger.getLogger(ConfidentialDaoImplTest.class);
 	
-	private static Student studentLily;
-	private static Student studentLucy;
+	private static Student student;
 	private static Confidential confidential;
 	private static StudentDao studentDao;
 	private static ConfidentialDao confidentialDao;
+	private static HibernateUtils hibernateUtils;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		studentLily = new Student("lily", "女", new Date());
-		studentLucy = new Student("lucy", "女", new Date());
+		student = new Student("lily", "女", new Date());
 		confidential = new Confidential("ctm386", new Date(), new Date());
 		studentDao  = new StudentDaoImpl();
 		confidentialDao = new ConfidentialDaoImpl();
+		
+		hibernateUtils = HibernateUtils.getInstance();
+		studentDao.setHibernateUtils(hibernateUtils);
+		confidentialDao.setHibernateUtils(hibernateUtils);
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		hibernateUtils.close();
 	}
 
 	@Before
@@ -51,8 +58,31 @@ public class ConfidentialDaoImplTest {
 	public void testGetConfidentialByUserName() {
 	}
 
+	@Ignore
 	@Test
 	public void testLoadAll() {
+		logger.debug(confidentialDao.loadAll());
+	}
+	
+	@Test
+	public void test03CascadeDelete() {
+		Confidential cfd = confidentialDao.getConfidentialByUserName(confidential.getUsername());
+		confidentialDao.delete(cfd);
+		logger.debug(confidentialDao.loadAll());
+	}
+	
+	@Test
+	public void test02GetByName() {
+		logger.debug(confidentialDao.getConfidentialByUserName(confidential.getUsername()));
+	}
+	
+	@Test
+	public void test01CascadeSave() {
+		student.setConfidential(confidential);
+		confidential.setStudent(student);
+		studentDao.save(student);
+		confidentialDao.save(confidential);
+		logger.debug(confidential);
 	}
 
 }

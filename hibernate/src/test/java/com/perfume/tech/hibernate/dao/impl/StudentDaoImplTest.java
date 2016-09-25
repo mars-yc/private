@@ -17,6 +17,7 @@ import com.perfume.tech.hibernate.dao.ConfidentialDao;
 import com.perfume.tech.hibernate.dao.StudentDao;
 import com.perfume.tech.hibernate.pojo.Confidential;
 import com.perfume.tech.hibernate.pojo.Student;
+import com.perfume.tech.hibernate.utils.HibernateUtils;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class StudentDaoImplTest {
@@ -28,6 +29,7 @@ public class StudentDaoImplTest {
 	private static Confidential confidential;
 	private static StudentDao studentDao;
 	private static ConfidentialDao confidentialDao;
+	private static HibernateUtils hibernateUtils;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -36,10 +38,15 @@ public class StudentDaoImplTest {
 		confidential = new Confidential("ctm386", new Date(), new Date());
 		studentDao  = new StudentDaoImpl();
 		confidentialDao = new ConfidentialDaoImpl();
+		
+		hibernateUtils = HibernateUtils.getInstance();
+		studentDao.setHibernateUtils(hibernateUtils);
+		confidentialDao.setHibernateUtils(hibernateUtils);
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		hibernateUtils.close();
 	}
 
 	@Before

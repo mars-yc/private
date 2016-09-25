@@ -11,7 +11,11 @@ import com.perfume.tech.hibernate.utils.HibernateUtils;
 
 public abstract class AbstractBaseDao<T> implements BaseDaoInterface<T> {
 	
-	protected HibernateUtils hibernateUtils = HibernateUtils.getInstance();
+	protected HibernateUtils hibernateUtils;
+	
+	public void setHibernateUtils(HibernateUtils hibernateUtils) {
+		this.hibernateUtils = hibernateUtils;
+	}
 
 	@Override
 	public final void save(T t) {
